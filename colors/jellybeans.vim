@@ -251,6 +251,11 @@ fun! s:rgb(rgb)
   return s:color(l:r, l:g, l:b)
 endfun
 
+" sets the highlighting for the undercurl
+fun! s:Xsp(group, undercurl)
+    exec "hi ".a:group." guisp=#".a:undercurl
+endfun
+
 " sets the highlighting for the given group
 fun! s:X(group, fg, bg, attr, lcfg, lcbg)
   if s:low_color
@@ -351,7 +356,7 @@ call s:X("PreProc","8fbfdc","","","LightBlue","")
 hi! link Operator Normal
 
 call s:X("Type","ffb964","","","Yellow","")
-call s:X("NonText","606060",g:jellybeans_background_color,"",s:termBlack,"")
+call s:X("NonText","303030",g:jellybeans_background_color,"",s:termBlack,"")
 
 call s:X("SpecialKey","444444","1c1c1c","",s:termBlack,"")
 
@@ -366,10 +371,10 @@ call s:X("Question","65C254","","","Green","")
 
 " Spell Checking
 
-call s:X("SpellBad","","902020","underline","","DarkRed")
-call s:X("SpellCap","","0000df","underline","","Blue")
-call s:X("SpellRare","","540063","underline","","DarkMagenta")
-call s:X("SpellLocal","","2D7067","underline","","Green")
+call s:Xsp("SpellBad","FF0000")
+call s:Xsp("SpellCap","FF4400")
+call s:Xsp("SpellRare","AA4400")
+call s:Xsp("SpellLocal","AA8800")
 
 " Diff
 
@@ -494,6 +499,7 @@ endif
 
 " delete functions {{{
 delf s:X
+delf s:Xsp
 delf s:rgb
 delf s:color
 delf s:rgb_color
